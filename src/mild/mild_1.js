@@ -10,9 +10,8 @@
  */
 export function sumToString(a, b) {
     let sum = a+b;
-    return (a, " + ", b, " = ", sum);
+    console.log(a, " + ", b, " = ", sum);
 }
-
 
 /**
  *
@@ -52,7 +51,7 @@ export function maxAndMin(numbers) {
             max = numbers[i];
         }
     }
-    return ("{ max: ", max, ", min: ", min, " }");
+    console.log("{ max: ", max, ", min: ", min, " }");
 }
 
 /**
