@@ -49,7 +49,7 @@ export function maxAndMin(numbers) {
             max = numbers[i];
         }
     }
-    console.log("{ max: ", max, ", min: ", min, " }");
+    return "{ max: " +  String(max) + ", min: " + String(min) + " }";
 }
 
 /**
