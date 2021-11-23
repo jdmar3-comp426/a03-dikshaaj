@@ -6,7 +6,7 @@
  * returns: { type: 'number', value: 4 }
  */
 export function identifyVariable(variable) {
-   console.log('{ type: ', typeof(variable), ', value: ', variable);
+   console.log('{ type: ', typeof(variable), ', value: ', variable, ' }');
 }
 
 
@@ -96,7 +96,7 @@ export function removeKeyNonDestructive(object, key) {
  */
 export function removeKeys(object, keyList) {
    let o = object;
-   for (let i=0; i<keyList.length(); i++) {
+   for (let i=0; i<keyList.length; i++) {
       delete o.keyList[i];
    }
    return o;

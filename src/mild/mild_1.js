@@ -10,7 +10,7 @@
  */
 export function sumToString(a, b) {
     let sum = a+b;
-    console.log(a, ' + ', b, ' = ', sum);
+    return String(a) + " + " + String(b) + " = " + sum;
 }
 
 /**
@@ -25,10 +25,8 @@ export function sumToString(a, b) {
  */
 export function getIncreasingArray(startNumber, endNumber) {
     let result = [];
-    let j=0;
     for (let i=startNumber;i<=endNumber; i++) {
-        result[j]=i;
-        j++;
+        result.push(i);
     }
     return result;
 }
@@ -65,5 +63,13 @@ export function maxAndMin(numbers) {
  *
  */
 export function countArray(array) {
-
+    let counter = {};
+    array.forEach(item => {
+        if (counter[item]) {
+            counter[item]++;
+        } else {
+            counter[item] = 1;
+        }
+    });
+    return counter;
 }
