@@ -6,7 +6,7 @@
  * returns: { type: 'number', value: 4 }
  */
 export function identifyVariable(variable) {
-   return "{ type: '" + typeof(variable) + "' , value: '" + String(variable) + "' }";
+   return "{ type: '" + typeof(variable) + "', value: '" + String(variable) + "' }";
 }
 
 
@@ -68,7 +68,8 @@ export function removeKey(object, key) {
  If only `removeKeyNonDestructive` was called, nothing would have changed.
  */
 export function removeKeyNonDestructive(object, key) {
-   let o = object; 
+   let o = {};
+   o = object;
    delete o[key];
    return o;
 }
@@ -89,7 +90,7 @@ export function removeKeyNonDestructive(object, key) {
     password: 'pass123'
  };
  obj = removeKeys(obj, ['password', 'age']);
- // object not looks like this
+ // object now looks like this
  { name: 'Mr. Boss', title: 'boss' }
 
  * @return {*} The object with its keys removed.
