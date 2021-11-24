@@ -6,7 +6,7 @@
  * returns: { type: 'number', value: 4 }
  */
 export function identifyVariable(variable) {
-   return '{ type: ' + typeof(variable) + ', value: ' + String(variable) + ' }';
+   return "{ type: '" + typeof(variable) + "' , value: '" + String(variable) + "' }";
 }
 
 
@@ -26,7 +26,7 @@ export function identifyVariable(variable) {
 export function identifyArray(array) {
    let result = [];
    for (let i=0; i<array.length; i++) {
-      result[i] = 'type: ' + typeof(array[i]) + ', value: ' + String(array[i]);
+      result[i] = "{ type: '" + typeof(array[i]) + "' , value: '" + String(array[i]) + " }";
    }
    return result;
 }
@@ -97,7 +97,7 @@ export function removeKeyNonDestructive(object, key) {
 export function removeKeys(object, keyList) {
    let o = object;
    for (let i=0; i<keyList.length; i++) {
-      removeKey(o, keyList[i]);
+      delete o[keyList[i]];
    }
    return o;
 }
