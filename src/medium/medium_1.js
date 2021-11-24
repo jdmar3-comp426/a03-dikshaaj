@@ -27,7 +27,7 @@ export function getSum(array) {
  */
 export function getMedian(array) {
     array.sort();
-    mid = array[Math.floor(array.length/2)];
+    let mid = array[Math.floor(array.length/2)];
     if (array.length%2 == 0) {
         mid = ((mid + array[Math.floor(array.length/2 - 1)])/2);
     }
