@@ -129,16 +129,16 @@ export function getMakerHybrids(array) {
             makesAndIds = {make: array[i].make, hybrids: array[i].id};
         }
     }
-    function groupBy(objectArr, property) {
-        return objectArr.reduce(function (acc, obj) {
-            let key = obj[property];
-            if (!acc[key]) {
-                acc[key] = [];
-            }
-            acc[key].push(obj);
-            return acc;
-        }, {})
-    }
+    // function groupBy(objectArr, property) {
+    //     return objectArr.reduce(function (acc, obj) {
+    //         let key = obj[property];
+    //         if (!acc[key]) {
+    //             acc[key] = [];
+    //         }
+    //         acc[key].push(obj);
+    //         return acc;
+    //     }, {})
+    // }
     return groupBy(makesAndIds, 'make');
 }
 
@@ -149,14 +149,14 @@ export function getYearAndHybrid(array) {
     for (let i=0; i<array.length; i++) {
         yearAndHybrid = {}
     }
-    function groupBy(objectArr, property) {
-        return objectArr.reduce(function (acc, obj) {
-            let key = obj[property];
-            if (!acc[key]) {
-                acc[key] = [];
-            }
-            acc[key].push(obj);
-            return acc;
-        }, {})
-    }
+    // function groupBy(objectArr, property) {
+    //     return objectArr.reduce(function (acc, obj) {
+    //         let key = obj[property];
+    //         if (!acc[key]) {
+    //             acc[key] = [];
+    //         }
+    //         acc[key].push(obj);
+    //         return acc;
+    //     }, {})
+    // }
 }
