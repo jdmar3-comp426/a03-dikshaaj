@@ -18,7 +18,10 @@ queries.
  *
  */
 export function searchHighPower(car_data, minHorsepower, minTorque) {
-
+    let res = car_data.sort(function(a,b) {
+        return b.horsepower - a.horsepower;
+    });
+    return res;
 }
 
 
@@ -33,7 +36,10 @@ export function searchHighPower(car_data, minHorsepower, minTorque) {
  *
  */
 export function searchMpg(car_data, minCity, minHighway) {
-
+    let res = car_data.sort(function(a, b) {
+        b.highway_mpg - a.highway_mpg;
+    });
+    return res;
 }
 
 
@@ -46,7 +52,25 @@ export function searchMpg(car_data, minCity, minHighway) {
  * @returns {[]} array of cars
  */
 export function searchName(car_data, searchTerm) {
-
+    let finds = [];
+    for (let i=0; i<car_data.length; i++) {
+        var o = car_data[i].id.search(searchTerm);
+        if (o > -1) {
+            var element = {priority: o, cars: car_data[i]};
+            var contain = false;
+            for (let j=0; j<finds.length; j++) {
+                if (finds[i].priority > element.priority) {
+                    finds.splice(j, 0, element);
+                    contain = true;
+                    break;
+                }
+            }
+            if (!contain) {
+                finds.push(element);
+            }
+        }
+    }
+    return finds;
 }
 
 
@@ -59,5 +83,14 @@ export function searchName(car_data, searchTerm) {
  * @returns {[]} an array of car objects
  */
 export function searchByYear(car_data, years) {
-
+    years.sort();
+    let res = [];
+    for(let i=0; i<car_data.length; i++) {
+        for (let j=0; j<years.length; j++) {
+            if(car_data[i].year == years[j]) {
+                res.push(car_data[i]);
+            }
+        }
+    }
+    return res;
 }
