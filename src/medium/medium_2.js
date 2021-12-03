@@ -142,8 +142,8 @@ export function getMakerHybrids(array) {
             };
             map[curr.make].hybrids.push(curr.hybrids);
         };
+        return res;
     }
-    return res;
     // function groupBy(objectArr, property) {
     //     return objectArr.reduce(function (acc, obj) {
     //         let key = obj[property];
