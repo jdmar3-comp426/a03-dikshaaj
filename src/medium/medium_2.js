@@ -129,6 +129,8 @@ export function getMakerHybrids(array) {
             makesAndIds = {make: array[i].make, hybrids: array[i].id};
         }
     }
+    
+    
     // function groupBy(objectArr, property) {
     //     return objectArr.reduce(function (acc, obj) {
     //         let key = obj[property];
@@ -139,7 +141,7 @@ export function getMakerHybrids(array) {
     //         return acc;
     //     }, {})
     // }
-    return groupBy(makesAndIds, 'make');
+    // return groupBy(makesAndIds, 'make');
 }
 
 
