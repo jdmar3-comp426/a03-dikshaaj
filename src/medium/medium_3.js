@@ -18,10 +18,10 @@ queries.
  *
  */
 export function searchHighPower(car_data, minHorsepower, minTorque) {
-    let res = car_data.sort(function(a,b) {
+    car_data.sort(function(a,b) {
         return b.horsepower - a.horsepower;
     });
-    return res;
+    return car_data;
 }
 
 
@@ -36,10 +36,10 @@ export function searchHighPower(car_data, minHorsepower, minTorque) {
  *
  */
 export function searchMpg(car_data, minCity, minHighway) {
-    let res = car_data.sort(function(a, b) {
+    car_data.sort(function(a, b) {
         return b.highway_mpg - a.highway_mpg;
     });
-    return res;
+    return car_data;
 }
 
 
