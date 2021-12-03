@@ -20,10 +20,8 @@ queries.
 export function searchHighPower(car_data, minHorsepower, minTorque) {
     let filtered = [];
     for (let i=0; i<car_data.length; i++) {
-        if (car_data[i].horsepower >= minHorsepower) {
-            if (car_data[i].torque >= minTorque) {
-                filtered.push(car_data[i]);
-            }
+        if (car_data[i].horsepower >= minHorsepower && car_data[i].torque >= minTorque) {
+            filtered.push(car_data[i]);
         }
     }
     filtered.sort(function(a,b) {
@@ -44,15 +42,16 @@ export function searchHighPower(car_data, minHorsepower, minTorque) {
  *
  */
 export function searchMpg(car_data, minCity, minHighway) {
-    for (let i=0; i<mpg_data.length; i++) {
-        if (parseFloat(mpg_data[i].highway_mpg) >= minHighway && parseFloat(mpg_data[i].city_mpg) >= minCity) {
-            car_data.push(mpg_data[i]);
+    let filtered = [];
+    for (let i=0; i<car_data.length; i++) {
+        if (car_data[i].highway_mpg >= minHighway && car_data[i].city_mpg >= minCity) {
+            filtered.push(car_data[i]);
         }
     }
-    car_data.sort(function(a, b) {
+    filtered.sort(function(a, b) {
         return parseFloat(b.highway_mpg) - parseFloat(a.highway_mpg);
     });
-    return car_data;
+    return filtered;
 }
 
 
