@@ -130,7 +130,20 @@ export function getMakerHybrids(array) {
         }
     }
     
-    
+    const transformArr = (makesAndIds = []) => {
+        const res = [];
+        const map = {};
+        let i, curr;
+        for (i=0; i<makesAndIds.length; i++) {
+            curr = makesAndIds[i];
+            if (!(curr.make in map)) {
+                map[curr.make] = {make: curr.make, hybrids: []};
+                res.push(map[curr.make]);
+            };
+            map[curr.make].hybrids.push(curr.hybrids);
+        };
+    }
+    return res;
     // function groupBy(objectArr, property) {
     //     return objectArr.reduce(function (acc, obj) {
     //         let key = obj[property];
