@@ -29,7 +29,9 @@ export function getMedian(array) {
     array.sort();
     let mid = array[Math.floor(array.length/2)];
     if (array.length%2 == 0) {
-        mid = ((mid + array[Math.floor((array.length/2) + 1)])/2);
+        let first = array[Math.floor(array.length/2)];
+        let second = array[Math.floor(array.length/2)-1];
+        mid = (first+second)/2;
     }
     return mid;
 }
