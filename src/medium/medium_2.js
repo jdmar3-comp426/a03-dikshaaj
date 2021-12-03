@@ -119,16 +119,34 @@ export const moreStats = {
 };
 
 export function getMakerHybrids(array) {
-    let makes = [];
-    let hybridIds = [];
+    // let makes = [];
+    // let hybridIds = [];
+    let makesAndIds = [];
     for (let i=0; i<array.length; i++) {
         if (array[i].hybrid == true) {
-            makes.push(array[i].make);
-            hybridIds.push(array[i].id);
+            // makes.push(array[i].make);
+            // hybridIds.push(array[i].id);
+            makesAndIds = {make: array[i].make, hybrids: array[i].id};
         }
     }
+    
+    return groupBy(makesAndIds, 'make');
+}
+
+function groupBy(objectArr, property) {
+    return objectArr.reduce(function (acc, obj) {
+        let key = obj[property];
+        if (!acc[key]) {
+            acc[key] = [];
+        }
+        acc[key].push(obj);
+        return acc;
+    }, {})
 }
 
 export function getYearAndHybrid(array) {
-
+    let yearAndHybrid = [];
+    for (let i=0; i<array.length; i++) {
+        yearAndHybrid = {}
+    }
 }
