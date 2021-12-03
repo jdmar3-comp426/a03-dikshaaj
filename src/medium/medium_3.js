@@ -18,8 +18,9 @@ queries.
  *
  */
 export function searchHighPower(car_data, minHorsepower, minTorque) {
+
     car_data.sort(function(a,b) {
-        return b.horsepower - a.horsepower;
+        return parseFloat(b.horsepower) - parseFloat(a.horsepower);
     });
     return car_data;
 }
@@ -37,7 +38,7 @@ export function searchHighPower(car_data, minHorsepower, minTorque) {
  */
 export function searchMpg(car_data, minCity, minHighway) {
     car_data.sort(function(a, b) {
-        return b.highway_mpg - a.highway_mpg;
+        return parseFloat(b.highway_mpg) - parseFloat(a.highway_mpg);
     });
     return car_data;
 }
