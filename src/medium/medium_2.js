@@ -160,10 +160,35 @@ export function getMakerHybrids(array) {
 
 
 export function getYearAndHybrid(array) {
-    let yearAndHybrid = [];
+    let hybrids = [];
+    let nonHybrids = [];
     for (let i=0; i<array.length; i++) {
-        yearAndHybrid = {}
+        if (array[i].hybrid) {
+            hybrids.push({city_mpg: array[i].city_mpg, highway_mpg: array[i].highway_mpg, year: array[i].year});
+        } else {
+            nonHybrids.push({city_mpg: array[i].city_mpg, highway_mpg: array[i].highway_mpg, year: array[i].year});
+        }
     }
+
+    const transformArr = (array = []) => {
+        const res = [];
+        const map = {};
+        let i, curr;
+        for (i=0; i<array.length; i++) {
+            curr = array[i];
+            if (!(curr.year in map)) {
+                map[curr.year] = {year: curr.year, hybrid: [], nonHybrid: []};
+                res.push(map[curr.year]);
+            };
+            if (curr.hybrid) {
+                map[curr.year].hybrid.push({city_mpg: curr.city_mpg, highway_mpg: curr.highway_mpg});
+            } else {
+                map[curr.year].nonHybrid.push({city_mpg: curr.city_mpg, highway_mpg: curr.highway_mpg});
+            }
+        };
+        return res;
+    }
+    
     // function groupBy(objectArr, property) {
     //     return objectArr.reduce(function (acc, obj) {
     //         let key = obj[property];
