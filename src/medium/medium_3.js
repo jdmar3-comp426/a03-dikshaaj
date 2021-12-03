@@ -70,7 +70,11 @@ export function searchName(car_data, searchTerm) {
             }
         }
     }
-    return finds.car;
+    let res = [];
+    for (let i=0; i<finds.length; i++) {
+        res.push(finds[i].car);
+    }
+    return res;
 }
 
 
