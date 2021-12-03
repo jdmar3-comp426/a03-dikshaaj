@@ -37,7 +37,7 @@ export function searchHighPower(car_data, minHorsepower, minTorque) {
  */
 export function searchMpg(car_data, minCity, minHighway) {
     let res = car_data.sort(function(a, b) {
-        b.highway_mpg - a.highway_mpg;
+        return b.highway_mpg - a.highway_mpg;
     });
     return res;
 }
@@ -56,7 +56,7 @@ export function searchName(car_data, searchTerm) {
     for (let i=0; i<car_data.length; i++) {
         var o = car_data[i].id.search(searchTerm);
         if (o > -1) {
-            var element = {priority: o, cars: car_data[i]};
+            var element = {priority: o, car: car_data[i]};
             var contain = false;
             for (let j=0; j<finds.length; j++) {
                 if (finds[i].priority > element.priority) {
@@ -70,7 +70,7 @@ export function searchName(car_data, searchTerm) {
             }
         }
     }
-    return finds;
+    return finds.car;
 }
 
 
