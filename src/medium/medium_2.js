@@ -35,7 +35,7 @@ export function getAvgMpg(array) {
     var cityAvg = getStatistics(cityMpg).mean;
     var hwyAvg = getStatistics(hwyMpg).mean;
     return {city: cityAvg, highway: hwyAvg};
-};
+}
 
 export function getAllYearStats(array) {
     let years = [];
@@ -43,7 +43,7 @@ export function getAllYearStats(array) {
         years.push(array[i].year);
     }
     return getStatistics(years);
-};
+}
 
 export function getRatioHybrids(array) {
     let isHybrid = 0;
@@ -53,7 +53,7 @@ export function getRatioHybrids(array) {
         }
     }
     return isHybrid/array.length;
-};
+}
 
 
 /**
@@ -119,5 +119,16 @@ export const moreStats = {
 };
 
 export function getMakerHybrids(array) {
+    let makes = [];
+    let hybridIds = [];
+    for (let i=0; i<array.length; i++) {
+        if (array[i].hybrid == true) {
+            makes.push(array[i].make);
+            hybridIds.push(array[i].id);
+        }
+    }
+}
 
-};
+export function getYearAndHybrid(array) {
+
+}
