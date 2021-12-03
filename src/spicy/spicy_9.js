@@ -15,11 +15,9 @@
  *                from calling the function
  */
 export const repeat = (fn, n, ...params) => {
-    let res = [];
     for (let i=0; i<n; i++) {
-        res.push(fn(params));
+        fn(params);
     }
-    return res;
 };
 
 /**
@@ -46,7 +44,7 @@ export const multiplyBy = (num1) => {
     const retMult = (num2) => {
         return num1*num2;
     }
-    return retMult(num2);
+    return retMult();
 };
 
 
