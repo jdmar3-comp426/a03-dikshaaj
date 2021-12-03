@@ -27,6 +27,7 @@ export const allCarStats = {
 
 export function getAvgMpg(array) {
     let hwyMpg = [];
+    let cityMpg = [];
     for (let i=0; i<array.length; i++) {
         hwyMpg.push(array[i].highway_mpg);
         cityMpg.push(array[i].city_mpg);
