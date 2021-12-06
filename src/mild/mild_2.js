@@ -6,9 +6,8 @@
  * returns: { type: 'number', value: 4 }
  */
 export function identifyVariable(variable) {
-
+   return { type: typeof(variable), value: variable};
 }
-
 
 /**
  *
@@ -24,7 +23,11 @@ export function identifyVariable(variable) {
 
  */
 export function identifyArray(array) {
-
+   let result = [];
+   for (let i=0; i<array.length; i++) {
+      result.push(identifyVariable(array[i]));
+   }
+   return result;
 }
 
 /**
@@ -44,7 +47,7 @@ export function identifyArray(array) {
  obj now does not contain the `password` field
  */
 export function removeKey(object, key) {
-
+   delete object[key];
 }
 
 /**
@@ -64,7 +67,9 @@ export function removeKey(object, key) {
  If only `removeKeyNonDestructive` was called, nothing would have changed.
  */
 export function removeKeyNonDestructive(object, key) {
-
+   let o = JSON.parse(JSON.stringify(object));
+   delete o[key];
+   return o;
 }
 
 /**
@@ -74,8 +79,6 @@ export function removeKeyNonDestructive(object, key) {
  * see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment
  *
  * example:
-
-
  let obj = {
     name: 'Mr. Boss',
     title: 'boss',
@@ -83,11 +86,15 @@ export function removeKeyNonDestructive(object, key) {
     password: 'pass123'
  };
  obj = removeKeys(obj, ['password', 'age']);
- // object not looks like this
+ // object now looks like this
  { name: 'Mr. Boss', title: 'boss' }
 
  * @return {*} The object with its keys removed.
  */
 export function removeKeys(object, keyList) {
-
+   let o = JSON.parse(JSON.stringify(object));
+   for (let i=0; i<keyList.length; i++) {
+      delete o[keyList[i]];
+   }
+   return o;
 }

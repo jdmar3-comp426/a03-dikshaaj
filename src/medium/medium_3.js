@@ -18,7 +18,16 @@ queries.
  *
  */
 export function searchHighPower(car_data, minHorsepower, minTorque) {
-
+    let filtered = [];
+    for (let i=0; i<car_data.length; i++) {
+        if (car_data[i].horsepower >= minHorsepower && car_data[i].torque >= minTorque) {
+            filtered.push(car_data[i]);
+        }
+    }
+    filtered.sort(function(a,b) {
+        return parseFloat(b.horsepower) - parseFloat(a.horsepower);
+    });
+    return filtered;
 }
 
 
@@ -33,7 +42,16 @@ export function searchHighPower(car_data, minHorsepower, minTorque) {
  *
  */
 export function searchMpg(car_data, minCity, minHighway) {
-
+    let filtered = [];
+    for (let i=0; i<car_data.length; i++) {
+        if (car_data[i].highway_mpg >= minHighway && car_data[i].city_mpg >= minCity) {
+            filtered.push(car_data[i]);
+        }
+    }
+    filtered.sort(function(a, b) {
+        return parseFloat(b.highway_mpg) - parseFloat(a.highway_mpg);
+    });
+    return filtered;
 }
 
 
@@ -46,7 +64,29 @@ export function searchMpg(car_data, minCity, minHighway) {
  * @returns {[]} array of cars
  */
 export function searchName(car_data, searchTerm) {
-
+    let finds = [];
+    for (let i=0; i<car_data.length; i++) {
+        var o = car_data[i].id.search(searchTerm);
+        if (o > -1) {
+            var element = {priority: o, car: car_data[i]};
+            var contain = false;
+            for (let j=0; j<finds.length; j++) {
+                if (finds[i].priority > element.priority) {
+                    finds.splice(j, 0, element);
+                    contain = true;
+                    break;
+                }
+            }
+            if (!contain) {
+                finds.push(element);
+            }
+        }
+    }
+    let res = [];
+    for (let i=0; i<finds.length; i++) {
+        res.push(finds[i].car);
+    }
+    return res;
 }
 
 
@@ -59,5 +99,14 @@ export function searchName(car_data, searchTerm) {
  * @returns {[]} an array of car objects
  */
 export function searchByYear(car_data, years) {
-
+    years.sort();
+    let res = [];
+    for(let i=0; i<car_data.length; i++) {
+        for (let j=0; j<years.length; j++) {
+            if(car_data[i].year == years[j]) {
+                res.push(car_data[i]);
+            }
+        }
+    }
+    return res;
 }

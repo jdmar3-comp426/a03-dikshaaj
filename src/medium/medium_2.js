@@ -20,10 +20,40 @@ see under the methods section
  * @param {allCarStats.ratioHybrids} ratio of cars that are hybrids
  */
 export const allCarStats = {
-    avgMpg: undefined,
-    allYearStats: undefined,
-    ratioHybrids: undefined,
+    avgMpg: getAvgMpg(mpg_data),
+    allYearStats: getAllYearStats(mpg_data),
+    ratioHybrids: getRatioHybrids(mpg_data),
 };
+
+export function getAvgMpg(array) {
+    let hwyMpg = [];
+    let cityMpg = [];
+    for (let i=0; i<array.length; i++) {
+        hwyMpg.push(array[i].highway_mpg);
+        cityMpg.push(array[i].city_mpg);
+    }
+    var cityAvg = getStatistics(cityMpg).mean;
+    var hwyAvg = getStatistics(hwyMpg).mean;
+    return {city: cityAvg, highway: hwyAvg};
+}
+
+export function getAllYearStats(array) {
+    let years = [];
+    for (let i=0; i<array.length; i++) {
+        years.push(array[i].year);
+    }
+    return getStatistics(years);
+}
+
+export function getRatioHybrids(array) {
+    let isHybrid = 0;
+    for (let i=0; i<array.length; i++) {
+        if (array[i].hybrid == true) {
+            isHybrid++;
+        }
+    }
+    return isHybrid/array.length;
+}
 
 
 /**
@@ -84,6 +114,89 @@ export const allCarStats = {
  * }
  */
 export const moreStats = {
-    makerHybrids: undefined,
-    avgMpgByYearAndHybrid: undefined
+    makerHybrids: getMakerHybrids(mpg_data),
+    avgMpgByYearAndHybrid: getYearAndHybrid(mpg_data)
 };
+
+export function getMakerHybrids(array) {
+    // let makes = [];
+    // let hybridIds = [];
+    let makesAndIds = [];
+    for (let i=0; i<array.length; i++) {
+        if (array[i].hybrid == true) {
+            // makes.push(array[i].make);
+            // hybridIds.push(array[i].id);
+            makesAndIds = {make: array[i].make, hybrids: array[i].id};
+        }
+    }
+    
+    const transformArr = (makesAndIds = []) => {
+        const res = [];
+        const map = {};
+        let i, curr;
+        for (i=0; i<makesAndIds.length; i++) {
+            curr = makesAndIds[i];
+            if (!(curr.make in map)) {
+                map[curr.make] = {make: curr.make, hybrids: []};
+                res.push(map[curr.make]);
+            };
+            map[curr.make].hybrids.push(curr.hybrids);
+        };
+        return res;
+    }
+    // function groupBy(objectArr, property) {
+    //     return objectArr.reduce(function (acc, obj) {
+    //         let key = obj[property];
+    //         if (!acc[key]) {
+    //             acc[key] = [];
+    //         }
+    //         acc[key].push(obj);
+    //         return acc;
+    //     }, {})
+    // }
+    // return groupBy(makesAndIds, 'make');
+}
+
+
+
+export function getYearAndHybrid(array) {
+    let hybrids = [];
+    let nonHybrids = [];
+    for (let i=0; i<array.length; i++) {
+        if (array[i].hybrid) {
+            hybrids.push({city_mpg: array[i].city_mpg, highway_mpg: array[i].highway_mpg, year: array[i].year});
+        } else {
+            nonHybrids.push({city_mpg: array[i].city_mpg, highway_mpg: array[i].highway_mpg, year: array[i].year});
+        }
+    }
+
+    const transformArr = (array = []) => {
+        const res = [];
+        const map = {};
+        let i, curr;
+        for (i=0; i<array.length; i++) {
+            curr = array[i];
+            if (!(curr.year in map)) {
+                map[curr.year] = {year: curr.year, hybrid: [], nonHybrid: []};
+                res.push(map[curr.year]);
+            };
+            if (curr.hybrid) {
+                map[curr.year].hybrid.push({city_mpg: curr.city_mpg, highway_mpg: curr.highway_mpg});
+            } else {
+                map[curr.year].nonHybrid.push({city_mpg: curr.city_mpg, highway_mpg: curr.highway_mpg});
+            }
+        };
+        return res;
+    }
+    
+    // function groupBy(objectArr, property) {
+    //     return objectArr.reduce(function (acc, obj) {
+    //         let key = obj[property];
+    //         if (!acc[key]) {
+    //             acc[key] = [];
+    //         }
+    //         acc[key].push(obj);
+    //         return acc;
+    //     }, {})
+    // }
+}
